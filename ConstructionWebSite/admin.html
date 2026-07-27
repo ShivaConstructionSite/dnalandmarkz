@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA LANDMARKZ | Master Admin Portal</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #070a0f;
+            --color-accent: #DA9F14;
+            --admin-card-bg: #0f172a;
+            --admin-card-border: rgba(218, 159, 20, 0.25);
+            --admin-input-bg: #020617;
+            --color-text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #030712;
+            color: #f8fafc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+        }
+
+        .login-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+            background: radial-gradient(circle at center, rgba(218, 159, 20, 0.12) 0%, transparent 65%);
+        }
+
+        .login-card {
+            background: var(--admin-card-bg);
+            border: 1px solid var(--admin-card-border);
+            border-radius: 20px;
+            padding: 44px 40px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(218, 159, 20, 0.08);
+            backdrop-filter: blur(16px);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-header svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 4px 12px rgba(218, 159, 20, 0.3));
+        }
+
+        .login-header h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 6px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .login-header p {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .admin-field-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .admin-field-label {
+            display: block !important;
+            font-size: 0.85rem !important;
+            font-weight: 600 !important;
+            color: #cbd5e1 !important;
+            margin-bottom: 8px !important;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .admin-field-input {
+            width: 100% !important;
+            height: 48px !important;
+            padding: 0 16px !important;
+            background: var(--admin-input-bg) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 10px !important;
+            color: #ffffff !important;
+            font-size: 0.95rem !important;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .admin-field-input:focus {
+            outline: none !important;
+            border-color: var(--color-accent) !important;
+            box-shadow: 0 0 0 3px rgba(218, 159, 20, 0.25) !important;
+            background: #090d16 !important;
+        }
+
+        textarea.admin-field-input {
+            height: auto !important;
+            min-height: 90px !important;
+            padding: 12px 16px !important;
+            resize: vertical !important;
+        }
+
+        .btn-admin {
+            width: 100%;
+            height: 50px;
+            margin-top: 10px;
+            background: linear-gradient(135deg, #DA9F14, #b8830f);
+            color: #030712;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-admin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(218, 159, 20, 0.4);
+        }
+
+        .alert-box {
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #fca5a5;
+        }
+
+        .alert-success {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.35);
+            color: #86efac;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .dashboard-container {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .admin-nav {
+            background: #090d16;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .admin-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .admin-user-bar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-logout {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-logout:hover {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            min-height: calc(100vh - 65px);
+        }
+
+        .admin-sidebar {
+            background: #060911;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 20px 0;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 24px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--color-accent);
+            background: rgba(218, 159, 20, 0.08);
+            border-left-color: var(--color-accent);
+        }
+
+        .admin-content {
+            padding: 36px 40px;
+            max-width: 980px;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .pane-header {
+            margin-bottom: 28px;
+        }
+
+        .pane-header h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin: 0 0 6px 0;
+            color: #fff;
+        }
+
+        .pane-header p {
+            color: var(--color-text-muted);
+            margin: 0;
+            font-size: 0.925rem;
+        }
+
+        .content-card {
+            background: var(--admin-card-bg);
+            border: 1px solid var(--admin-card-border);
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 28px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #DA9F14, #b8830f);
+            color: #030712;
+            border: none;
+            padding: 13px 32px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-save:hover {
+            box-shadow: 0 6px 20px rgba(218, 159, 20, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .project-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #060911;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+        }
+
+        .project-thumb {
+            width: 56px;
+            height: 56px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: #1e293b;
+        }
+
+        .project-details {
+            flex-grow: 1;
+            margin: 0 18px;
+        }
+
+        .project-details h4 {
+            margin: 0 0 4px 0;
+            font-size: 0.975rem;
+            color: #fff;
+        }
+
+        .project-details span {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            background: rgba(218, 159, 20, 0.12);
+            padding: 3px 10px;
+            border-radius: 6px;
+        }
+
+        .btn-delete {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.825rem;
+            font-weight: 600;
+        }
+
+        .btn-delete:hover {
+            background: #ef4444;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div class="login-wrapper" id="loginScreen">
+        <div class="login-card">
+            <div class="login-header">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 78 C40 70, 60 70, 80 78 C60 74, 40 74, 20 78 Z" fill="#fff"/>
+                    <path d="M30 83 C45 79, 55 79, 70 83 C55 81, 45 81, 30 83 Z" fill="#fff"/>
+                    <path d="M43 73 C22 72, 23 38, 44 32 C30 38, 29 66, 43 73 Z" fill="#fff"/>
+                    <path d="M46 73 L46 22 L51 9 L51 73 Z" fill="#DA9F14"/>
+                    <path d="M54 73 L54 36 L62 26 L62 44 L57 44 L57 73 Z" fill="#4E779A"/>
+                </svg>
+                <h2>DNA LANDMARKZ</h2>
+                <p>Master Control Portal</p>
+            </div>
+
+            <div class="alert-box alert-danger" id="loginError">
+                Invalid Email or Password. Default: admin@dnalandmarkz.com / admin
+            </div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="admin-field-group">
+                    <label class="admin-field-label" for="loginEmail">Admin Email / Username</label>
+                    <input type="email" id="loginEmail" class="admin-field-input" value="admin@dnalandmarkz.com" required>
+                </div>
+                <div class="admin-field-group">
+                    <label class="admin-field-label" for="loginPass">Password</label>
+                    <input type="password" id="loginPass" class="admin-field-input" value="admin" required>
+                </div>
+                <button type="submit" class="btn-admin">Sign In to Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div class="dashboard-container" id="dashboardScreen">
+        <!-- Top Nav -->
+        <header class="admin-nav">
+            <div class="admin-brand">
+                <svg width="30" height="30" viewBox="0 0 100 100" fill="none">
+                    <path d="M46 73 L46 22 L51 9 L51 73 Z" fill="#DA9F14"/>
+                    <path d="M54 73 L54 36 L62 26 L62 44 L57 44 L57 73 Z" fill="#4E779A"/>
+                </svg>
+                <span>DNA LANDMARKZ CMS</span>
+            </div>
+            <div class="admin-user-bar">
+                <span style="font-size: 0.875rem; color: #94a3b8;" id="activeUserLabel">admin@dnalandmarkz.com</span>
+                <a href="index.html" target="_blank" style="color: var(--color-accent); text-decoration: none; font-size: 0.875rem; font-weight: 700;">View Live Site ↗</a>
+                <button class="btn-logout" onclick="handleLogout()">Sign Out</button>
+            </div>
+        </header>
+
+        <div class="dashboard-layout">
+            <!-- Sidebar Navigation: Top to Bottom Sections -->
+            <nav class="admin-sidebar">
+                <div class="nav-item active" onclick="switchTab('tabTicker', this)">🚂 1. Offer Train Ticker</div>
+                <div class="nav-item" onclick="switchTab('tabNav', this)">🧭 2. Navigation Bar</div>
+                <div class="nav-item" onclick="switchTab('tabHero', this)">🏠 3. Home / Hero Section</div>
+                <div class="nav-item" onclick="switchTab('tabServices', this)">🛠️ 4. Service Section</div>
+                <div class="nav-item" onclick="switchTab('tabWhyChoose', this)">🏆 5. Why Choose Us</div>
+                <div class="nav-item" onclick="switchTab('tabAbout', this)">ℹ️ 6. About & Stats</div>
+                <div class="nav-item" onclick="switchTab('tabProjects', this)">📁 7. Projects Gallery</div>
+                <div class="nav-item" onclick="switchTab('tabTestimonials', this)">💬 8. Testimonials</div>
+                <div class="nav-item" onclick="switchTab('tabContact', this)">📞 9. Contact & Free Consult</div>
+                <div class="nav-item" onclick="switchTab('tabFooter', this)">🦶 10. Footer Section</div>
+                <div class="nav-item" onclick="switchTab('tabSEO', this)">🔍 11. SEO Settings</div>
+                <div class="nav-item" onclick="switchTab('tabAccount', this)">🔐 12. Admin Credentials</div>
+            </nav>
+
+            <!-- Main Content Area -->
+            <main class="admin-content">
+                
+                <div class="alert-box alert-success" id="saveSuccess">
+                    ✅ Changes saved successfully! View site to see updates.
+                </div>
+
+                <!-- 1. TAB: Offer Train Ticker -->
+                <div class="tab-pane active" id="tabTicker">
+                    <div class="pane-header">
+                        <h2>🚂 Moving Offer Train Ticker Bar</h2>
+                        <p>Configure festival discount announcement train bar moving at top of website.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Offer Train Settings</div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="cfgTickerEnabled" style="width: 20px; height: 20px;" checked>
+                                Enable Moving Offer Train Banner on Website
+                            </label>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Offer Badge Title (e.g. 🎉 FESTIVAL 50% OFFER)</label>
+                            <input type="text" id="cfgTickerBadge" class="admin-field-input">
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Scrolling Offer Announcement Message</label>
+                            <textarea id="cfgTickerText" class="admin-field-input"></textarea>
+                        </div>
+                    </div>
+
+                    <button class="btn-save" onclick="saveTickerConfig()">Save Offer Train Settings</button>
+                </div>
+
+                <!-- 2. TAB: Navigation Bar -->
+                <div class="tab-pane" id="tabNav">
+                    <div class="pane-header">
+                        <h2>🧭 Navigation Bar Settings</h2>
+                        <p>Update header brand logo text, subtitle, and top phone button.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Header Logo & Brand Title</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Logo Main Text (e.g. DNA)</label>
+                                <input type="text" id="cfgLogoTitle" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Logo Accent Text (e.g. LANDMARKZ)</label>
+                                <input type="text" id="cfgLogoAccent" class="admin-field-input">
+                            </div>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Logo Tagline Subtitle</label>
+                            <input type="text" id="cfgLogoSubtitle" class="admin-field-input">
+                        </div>
+                    </div>
+
+                    <button class="btn-save" onclick="saveNavConfig()">Save Navigation Settings</button>
+                </div>
+
+                <!-- 3. TAB: Home / Hero Section -->
+                <div class="tab-pane" id="tabHero">
+                    <div class="pane-header">
+                        <h2>🏠 Home / Hero Banner Section</h2>
+                        <p>Update headline text, taglines, and main hero description.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Homepage Banner</div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Banner Subtitle / Tagline</label>
+                            <input type="text" id="cfgHeroSubtitle" class="admin-field-input">
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Main Headline Title</label>
+                            <input type="text" id="cfgHeroTitle" class="admin-field-input">
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Hero Description</label>
+                            <textarea id="cfgHeroDesc" class="admin-field-input"></textarea>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Hero Background Image URL / File</label>
+                            <input type="text" id="cfgHeroBg" class="admin-field-input" placeholder="hero-bg.jpg or https://...">
+                        </div>
+                    </div>
+
+                    <button class="btn-save" onclick="saveHeroConfig()">Save Home Section</button>
+                </div>
+
+                <!-- 4. TAB: Service Section -->
+                <div class="tab-pane" id="tabServices">
+                    <div class="pane-header">
+                        <h2>🛠️ Service Section Manager</h2>
+                        <p>Edit services section headers, titles, and service bullet points.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Section Header</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Subtitle</label>
+                                <input type="text" id="cfgServicesSubtitle" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Title</label>
+                                <input type="text" id="cfgServicesTitle" class="admin-field-input">
+                            </div>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Section Description</label>
+                            <textarea id="cfgServicesDesc" class="admin-field-input"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Service Cards Details</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Service 1 Title</label>
+                                <input type="text" id="cfgS1Title" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Service 1 Bullets (comma separated)</label>
+                                <input type="text" id="cfgS1Bullets" class="admin-field-input">
+                            </div>
+                        </div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Service 2 Title</label>
+                                <input type="text" id="cfgS2Title" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Service 2 Bullets (comma separated)</label>
+                                <input type="text" id="cfgS2Bullets" class="admin-field-input">
+                            </div>
+                        </div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Service 3 Title</label>
+                                <input type="text" id="cfgS3Title" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Service 3 Bullets (comma separated)</label>
+                                <input type="text" id="cfgS3Bullets" class="admin-field-input">
+                            </div>
+                        </div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Service 4 Title</label>
+                                <input type="text" id="cfgS4Title" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Service 4 Bullets (comma separated)</label>
+                                <input type="text" id="cfgS4Bullets" class="admin-field-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-save" onclick="saveServicesConfig()">Save Services Section</button>
+                </div>
+
+                <!-- 5. TAB: Why Choose Us -->
+                <div class="tab-pane" id="tabWhyChoose">
+                    <div class="pane-header">
+                        <h2>🏆 Why Choose Us Section</h2>
+                        <p>Edit core strengths, quality assurance, custom design, and transparency descriptions.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Section Header</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Subtitle</label>
+                                <input type="text" id="cfgWhySubtitle" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Title</label>
+                                <input type="text" id="cfgWhyTitle" class="admin-field-input">
+                            </div>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Description</label>
+                            <textarea id="cfgWhyDesc" class="admin-field-input"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Core Strengths Cards</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Strength 1 Title</label>
+                                <input type="text" id="cfgWhy1Title" class="admin-field-input">
+                                <label class="admin-field-label" style="margin-top:8px;">Description</label>
+                                <textarea id="cfgWhy1Desc" class="admin-field-input"></textarea>
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Strength 2 Title</label>
+                                <input type="text" id="cfgWhy2Title" class="admin-field-input">
+                                <label class="admin-field-label" style="margin-top:8px;">Description</label>
+                                <textarea id="cfgWhy2Desc" class="admin-field-input"></textarea>
+                            </div>
+                        </div>
+                        <div class="grid-2" style="margin-top:16px;">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Strength 3 Title</label>
+                                <input type="text" id="cfgWhy3Title" class="admin-field-input">
+                                <label class="admin-field-label" style="margin-top:8px;">Description</label>
+                                <textarea id="cfgWhy3Desc" class="admin-field-input"></textarea>
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Strength 4 Title</label>
+                                <input type="text" id="cfgWhy4Title" class="admin-field-input">
+                                <label class="admin-field-label" style="margin-top:8px;">Description</label>
+                                <textarea id="cfgWhy4Desc" class="admin-field-input"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-save" onclick="saveWhyChooseConfig()">Save Strengths Section</button>
+                </div>
+
+                <!-- 6. TAB: About Us & Stats -->
+                <div class="tab-pane" id="tabAbout">
+                    <div class="pane-header">
+                        <h2>ℹ️ About Us & Statistics Counter</h2>
+                        <p>Edit company history, stat numbers (100+, 100%, etc.), Vision, and Mission.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">About Overview</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Subtitle</label>
+                                <input type="text" id="cfgAboutSubtitle" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Main Title</label>
+                                <input type="text" id="cfgAboutTitle" class="admin-field-input">
+                            </div>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Description</label>
+                            <textarea id="cfgAboutDesc" class="admin-field-input"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Statistics Numbers</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Projects Completed Stat (e.g. 100+)</label>
+                                <input type="text" id="cfgStatProjects" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Quality Score Stat (e.g. 100%)</label>
+                                <input type="text" id="cfgStatQuality" class="admin-field-input">
+                            </div>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Years Experience Stat (e.g. 10+)</label>
+                            <input type="text" id="cfgStatExperience" class="admin-field-input">
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Vision & Mission Tabs</div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Our Vision Text</label>
+                            <textarea id="cfgVisionText" class="admin-field-input"></textarea>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Our Mission Text</label>
+                            <textarea id="cfgMissionText" class="admin-field-input"></textarea>
+                        </div>
+                    </div>
+
+                    <button class="btn-save" onclick="saveAboutConfig()">Save About Section</button>
+                </div>
+
+                <!-- 7. TAB: Projects Gallery -->
+                <div class="tab-pane" id="tabProjects">
+                    <div class="pane-header">
+                        <h2>📁 Projects Gallery Manager</h2>
+                        <p>Add new project photos or remove existing ones.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Add New Project</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Project Name / Title</label>
+                                <input type="text" id="newProjTitle" class="admin-field-input" placeholder="e.g. Luxury Villa Construction">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Category</label>
+                                <select id="newProjCategory" class="admin-field-input" style="height: 48px;">
+                                    <option value="Construction">Construction</option>
+                                    <option value="Architectural">Architectural</option>
+                                    <option value="Interiors">Interiors</option>
+                                    <option value="Renovation">Renovation</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Image Source (Upload File or Enter Image URL)</label>
+                            <input type="file" id="newProjFileInput" class="admin-field-input" accept="image/*" style="padding: 10px;" onchange="convertImageToBase64(this)">
+                            <small style="color: #94a3b8; display: block; margin-top: 6px;">Or paste image URL below:</small>
+                            <input type="text" id="newProjImageUrl" class="admin-field-input" style="margin-top: 8px;" placeholder="https://...">
+                        </div>
+                        <button class="btn-save" style="background: #2563eb; color: #fff;" onclick="addNewProject()">+ Add Project to Gallery</button>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Current Projects List</div>
+                        <div id="projectsContainer"></div>
+                    </div>
+                </div>
+
+                <!-- 8. TAB: Testimonials -->
+                <div class="tab-pane" id="tabTestimonials">
+                    <div class="pane-header">
+                        <h2>💬 Client Testimonials Manager</h2>
+                        <p>Add new customer reviews or delete existing ones.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Add New Testimonial Review</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Client Name</label>
+                                <input type="text" id="newTestimonialName" class="admin-field-input" placeholder="e.g. M. Subramanian">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Designation / Role / Location</label>
+                                <input type="text" id="newTestimonialRole" class="admin-field-input" placeholder="e.g. Director, Dental Clinic, Anna Nagar">
+                            </div>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Review Text</label>
+                            <textarea id="newTestimonialText" class="admin-field-input" placeholder="Write client feedback here..."></textarea>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Client Photo (Upload File or Enter Image URL)</label>
+                            <input type="file" id="newTestimonialFileInput" class="admin-field-input" accept="image/*" style="padding: 10px;" onchange="convertImageToBase64(this, 'newTestimonialImageUrl')">
+                            <small style="color: #94a3b8; display: block; margin-top: 6px;">Or paste image URL below:</small>
+                            <input type="text" id="newTestimonialImageUrl" class="admin-field-input" style="margin-top: 8px;" placeholder="https://...">
+                        </div>
+                        <button class="btn-save" style="background: #2563eb; color: #fff;" onclick="addNewTestimonial()">+ Add Testimonial</button>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Current Client Testimonials</div>
+                        <div id="testimonialsContainer"></div>
+                    </div>
+                </div>
+
+                <!-- 9. TAB: Contact & Free Consultation -->
+                <div class="tab-pane" id="tabContact">
+                    <div class="pane-header">
+                        <h2>📞 Contact & Free Consultation Info</h2>
+                        <p>Manage phone numbers, email address, and consultation panel text.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Phones & Email</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Main Consultation Phone (+91...)</label>
+                                <input type="text" id="cfgMainPhone" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Developer / Secondary Phone</label>
+                                <input type="text" id="cfgDevPhone" class="admin-field-input">
+                            </div>
+                        </div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Official Email Address</label>
+                                <input type="email" id="cfgEmail" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Corporate Office Address</label>
+                                <input type="text" id="cfgAddress" class="admin-field-input">
+                            </div>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Consultation Panel Description</label>
+                            <textarea id="cfgContactDesc" class="admin-field-input"></textarea>
+                        </div>
+                    </div>
+
+                    <button class="btn-save" onclick="saveGeneralConfig()">Save Contact Settings</button>
+                </div>
+
+                <!-- 10. TAB: Footer Section -->
+                <div class="tab-pane" id="tabFooter">
+                    <div class="pane-header">
+                        <h2>🦶 Footer Section</h2>
+                        <p>Manage copyright text, developer attribution, and page end divider text.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Footer Text Details</div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Copyright Text</label>
+                            <input type="text" id="cfgCopyright" class="admin-field-input">
+                        </div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Developer Name</label>
+                                <input type="text" id="cfgDevName" class="admin-field-input">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Developer Experience Text</label>
+                                <input type="text" id="cfgDevExp" class="admin-field-input">
+                            </div>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Page Bottom End Divider Text</label>
+                            <input type="text" id="cfgEndText" class="admin-field-input">
+                        </div>
+                    </div>
+
+                    <button class="btn-save" onclick="saveFooterConfig()">Save Footer Settings</button>
+                </div>
+
+                <!-- 11. TAB: SEO Settings -->
+                <div class="tab-pane" id="tabSEO">
+                    <div class="pane-header">
+                        <h2>🔍 Search Engine Optimization (SEO)</h2>
+                        <p>Manage meta tags for Google Search rankings.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Google Search Meta Tags</div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Google Title Tag</label>
+                            <input type="text" id="cfgSeoTitle" class="admin-field-input">
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Meta Description (Shows in Google results)</label>
+                            <textarea id="cfgSeoDesc" class="admin-field-input"></textarea>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Meta Keywords</label>
+                            <input type="text" id="cfgSeoKeywords" class="admin-field-input">
+                        </div>
+                    </div>
+
+                    <button class="btn-save" onclick="saveSEOConfig()">Save SEO Tags</button>
+                </div>
+
+                <!-- 12. TAB: Admin Account Credentials -->
+                <div class="tab-pane" id="tabAccount">
+                    <div class="pane-header">
+                        <h2>🔐 Admin Login Credentials</h2>
+                        <p>Change your admin login email and password.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Change Password</div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Admin Login Email</label>
+                            <input type="email" id="cfgAdminEmail" class="admin-field-input">
+                        </div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">New Password</label>
+                                <input type="password" id="cfgAdminPass" class="admin-field-input" placeholder="Enter new password">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Confirm New Password</label>
+                                <input type="password" id="cfgAdminPassConfirm" class="admin-field-input" placeholder="Confirm password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-save" onclick="saveAdminCredentials()">Update Admin Password</button>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- CMS LOGIC SCRIPT -->
+    <script src="js/cms-core.js"></script>
+</body>
+</html>
