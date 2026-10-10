@@ -6,6 +6,8 @@
     <title>DNA LANDMARKZ | Master Admin Portal</title>
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- Meta robots -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,6 +118,15 @@
             border-color: var(--color-accent) !important;
             box-shadow: 0 0 0 3px rgba(218, 159, 20, 0.25) !important;
             background: #090d16 !important;
+        }
+
+        /* Autofill Overrides */
+        .admin-field-input:-webkit-autofill,
+        .admin-field-input:-webkit-autofill:hover, 
+        .admin-field-input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #ffffff !important;
+            -webkit-box-shadow: 0 0 0px 1000px #020617 inset !important;
+            transition: background-color 5000s ease-in-out 0s;
         }
 
         textarea.admin-field-input {
@@ -377,11 +388,23 @@
             background: #ef4444;
             color: #fff;
         }
+
+        @media (max-width: 900px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .admin-content {
+                padding: 24px 16px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- LOGIN SCREEN -->
+    <!-- LOGIN SCREEN (Autofill Off) -->
     <div class="login-wrapper" id="loginScreen">
         <div class="login-card">
             <div class="login-header">
@@ -396,18 +419,46 @@
                 <p>Master Control Portal</p>
             </div>
 
+            <!-- Clean error notification without exposing password -->
             <div class="alert-box alert-danger" id="loginError">
-                Invalid Email or Password. Default: admin@dnalandmarkz.com / admin
+                Invalid Email or Password. Please verify and try again.
             </div>
 
-            <form id="loginForm" onsubmit="handleLogin(event)">
+            <!-- Form with strict autofill protection -->
+            <form id="loginForm" autocomplete="off" onsubmit="handleLogin(event)">
+                <!-- Decoys to prevent automated browser autofill -->
+                <input type="text" style="display:none" tabindex="-1" autocomplete="off">
+                <input type="password" style="display:none" tabindex="-1" autocomplete="off">
+
                 <div class="admin-field-group">
                     <label class="admin-field-label" for="loginEmail">Admin Email / Username</label>
-                    <input type="email" id="loginEmail" class="admin-field-input" value="admin@dnalandmarkz.com" required>
+                    <input 
+                        type="text" 
+                        id="loginEmail" 
+                        class="admin-field-input" 
+                        placeholder="admin@dnalandmarkz.com" 
+                        autocomplete="off"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                        data-lpignore="true"
+                        data-form-type="other"
+                        required>
                 </div>
                 <div class="admin-field-group">
                     <label class="admin-field-label" for="loginPass">Password</label>
-                    <input type="password" id="loginPass" class="admin-field-input" value="admin" required>
+                    <input 
+                        type="password" 
+                        id="loginPass" 
+                        class="admin-field-input" 
+                        placeholder="Enter Security Password" 
+                        autocomplete="new-password"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                        data-lpignore="true"
+                        data-form-type="other"
+                        required>
                 </div>
                 <button type="submit" class="btn-admin">Sign In to Dashboard</button>
             </form>
@@ -440,13 +491,16 @@
                 <div class="nav-item" onclick="switchTab('tabHero', this)">🏠 3. Home / Hero Section</div>
                 <div class="nav-item" onclick="switchTab('tabServices', this)">🛠️ 4. Service Section</div>
                 <div class="nav-item" onclick="switchTab('tabWhyChoose', this)">🏆 5. Why Choose Us</div>
-                <div class="nav-item" onclick="switchTab('tabAbout', this)">ℹ️ 6. About & Stats</div>
+                <div class="nav-item" onclick="switchTab('tabAbout', this)">ℹ️ 6. About &amp; Stats</div>
                 <div class="nav-item" onclick="switchTab('tabProjects', this)">📁 7. Projects Gallery</div>
                 <div class="nav-item" onclick="switchTab('tabTestimonials', this)">💬 8. Testimonials</div>
-                <div class="nav-item" onclick="switchTab('tabContact', this)">📞 9. Contact & Free Consult</div>
-                <div class="nav-item" onclick="switchTab('tabFooter', this)">🦶 10. Footer Section</div>
-                <div class="nav-item" onclick="switchTab('tabSEO', this)">🔍 11. SEO Settings</div>
-                <div class="nav-item" onclick="switchTab('tabAccount', this)">🔐 12. Admin Credentials</div>
+                <div class="nav-item" onclick="switchTab('tabContact', this)">📞 9. Contact &amp; Free Consult</div>
+                <div class="nav-item" onclick="switchTab('tabInquiries', this)">📥 10. Client Inquiries</div>
+                <div class="nav-item" onclick="switchTab('tabFooter', this)">🦶 11. Footer Section</div>
+                <div class="nav-item" onclick="switchTab('tabPrivacy', this)">🛡️ 12. Privacy Policy</div>
+                <div class="nav-item" onclick="switchTab('tabTerms', this)">📜 13. Terms &amp; Conditions</div>
+                <div class="nav-item" onclick="switchTab('tabSEO', this)">🔍 14. SEO Settings</div>
+                <div class="nav-item" onclick="switchTab('tabAccount', this)">🔐 15. Admin Credentials</div>
             </nav>
 
             <!-- Main Content Area -->
@@ -492,7 +546,7 @@
                     </div>
 
                     <div class="content-card">
-                        <div class="card-title">Header Logo & Brand Title</div>
+                        <div class="card-title">Header Logo &amp; Brand Title</div>
                         <div class="grid-2">
                             <div class="admin-field-group">
                                 <label class="admin-field-label">Logo Main Text (e.g. DNA)</label>
@@ -677,7 +731,7 @@
                 <!-- 6. TAB: About Us & Stats -->
                 <div class="tab-pane" id="tabAbout">
                     <div class="pane-header">
-                        <h2>ℹ️ About Us & Statistics Counter</h2>
+                        <h2>ℹ️ About Us &amp; Statistics Counter</h2>
                         <p>Edit company history, stat numbers (100+, 100%, etc.), Vision, and Mission.</p>
                     </div>
 
@@ -718,7 +772,7 @@
                     </div>
 
                     <div class="content-card">
-                        <div class="card-title">Vision & Mission Tabs</div>
+                        <div class="card-title">Vision &amp; Mission Tabs</div>
                         <div class="admin-field-group">
                             <label class="admin-field-label">Our Vision Text</label>
                             <textarea id="cfgVisionText" class="admin-field-input"></textarea>
@@ -758,7 +812,7 @@
                         </div>
                         <div class="admin-field-group">
                             <label class="admin-field-label">Image Source (Upload File or Enter Image URL)</label>
-                            <input type="file" id="newProjFileInput" class="admin-field-input" accept="image/*" style="padding: 10px;" onchange="convertImageToBase64(this)">
+                            <input type="file" id="newProjFileInput" class="admin-field-input" accept="image/*" style="padding: 10px;" onchange="convertImageToBase64(this, 'newProjImageUrl')">
                             <small style="color: #94a3b8; display: block; margin-top: 6px;">Or paste image URL below:</small>
                             <input type="text" id="newProjImageUrl" class="admin-field-input" style="margin-top: 8px;" placeholder="https://...">
                         </div>
@@ -812,20 +866,20 @@
                 <!-- 9. TAB: Contact & Free Consultation -->
                 <div class="tab-pane" id="tabContact">
                     <div class="pane-header">
-                        <h2>📞 Contact & Free Consultation Info</h2>
+                        <h2>📞 Contact &amp; Free Consultation Info</h2>
                         <p>Manage phone numbers, email address, and consultation panel text.</p>
                     </div>
 
                     <div class="content-card">
-                        <div class="card-title">Phones & Email</div>
+                        <div class="card-title">Phones &amp; Email</div>
                         <div class="grid-2">
                             <div class="admin-field-group">
                                 <label class="admin-field-label">Main Consultation Phone (+91...)</label>
                                 <input type="text" id="cfgMainPhone" class="admin-field-input">
                             </div>
                             <div class="admin-field-group">
-                                <label class="admin-field-label">Developer / Secondary Phone</label>
-                                <input type="text" id="cfgDevPhone" class="admin-field-input">
+                                <label class="admin-field-label">Secondary Consultation Phone</label>
+                                <input type="text" id="cfgDevPhone" class="admin-field-input" placeholder="+91...">
                             </div>
                         </div>
                         <div class="grid-2">
@@ -847,42 +901,183 @@
                     <button class="btn-save" onclick="saveGeneralConfig()">Save Contact Settings</button>
                 </div>
 
-                <!-- 10. TAB: Footer Section -->
+                <!-- 10. TAB: Client Inquiries -->
+                <div class="tab-pane" id="tabInquiries">
+                    <div class="pane-header">
+                        <h2>📥 Customer Consultation Inquiries</h2>
+                        <p>Real-time inquiries submitted via the website contact form.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Submitted Client Leads</div>
+                        <div id="inquiriesContainer"></div>
+                    </div>
+                </div>
+
+                <!-- 11. TAB: Footer Section -->
                 <div class="tab-pane" id="tabFooter">
                     <div class="pane-header">
-                        <h2>🦶 Footer Section</h2>
-                        <p>Manage copyright text, developer attribution, and page end divider text.</p>
+                        <h2>🦶 11. Footer Section</h2>
+                        <p>Manage copyright text, developer software company attribution, and page end divider text.</p>
                     </div>
 
                     <div class="content-card">
                         <div class="card-title">Footer Text Details</div>
                         <div class="admin-field-group">
                             <label class="admin-field-label">Copyright Text</label>
-                            <input type="text" id="cfgCopyright" class="admin-field-input">
+                            <input type="text" id="cfgCopyright" class="admin-field-input" placeholder="© 2026 DNA LANDMARKZ. All rights reserved.">
                         </div>
                         <div class="grid-2">
                             <div class="admin-field-group">
-                                <label class="admin-field-label">Developer Name</label>
-                                <input type="text" id="cfgDevName" class="admin-field-input">
+                                <label class="admin-field-label">Developer / Software Company Name</label>
+                                <input type="text" id="cfgDevName" class="admin-field-input" placeholder="Spatial Anchor Software Private Limited">
                             </div>
                             <div class="admin-field-group">
-                                <label class="admin-field-label">Developer Experience Text</label>
-                                <input type="text" id="cfgDevExp" class="admin-field-input">
+                                <label class="admin-field-label">Developer Contact Email</label>
+                                <input type="email" id="cfgDevEmail" class="admin-field-input" placeholder="rajadrcs@gmail.com">
                             </div>
                         </div>
                         <div class="admin-field-group">
                             <label class="admin-field-label">Page Bottom End Divider Text</label>
-                            <input type="text" id="cfgEndText" class="admin-field-input">
+                            <input type="text" id="cfgEndText" class="admin-field-input" placeholder="- END -">
                         </div>
                     </div>
 
                     <button class="btn-save" onclick="saveFooterConfig()">Save Footer Settings</button>
                 </div>
 
-                <!-- 11. TAB: SEO Settings -->
+                <!-- 12. TAB: Privacy Policy -->
+                <div class="tab-pane" id="tabPrivacy">
+                    <div class="pane-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <h2>🛡️ 12. Privacy Policy Editor</h2>
+                            <p>Edit clauses, grievance contact, and policy text published on <a href="privacy.html" target="_blank" style="color:var(--color-accent); text-decoration:underline;">privacy.html</a>.</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="privacy.html" target="_blank" class="btn-save" style="background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                                <span>Preview Page ↗</span>
+                            </a>
+                            <button class="btn-save" style="background: #2563eb; color: #fff;" onclick="exportPrivacyHtml()">
+                                <span>📥 Download HTML</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Policy Metadata &amp; Fast Contact</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Last Updated Date / Notice</label>
+                                <input type="text" id="cfgPrivacyLastUpdated" class="admin-field-input" placeholder="e.g. October 2026">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Grievance Support Email</label>
+                                <input type="email" id="cfgPrivacyEmail" class="admin-field-input" placeholder="info@dnalandmarkz.com">
+                            </div>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Customer Support Phone</label>
+                            <input type="text" id="cfgPrivacyPhone" class="admin-field-input" placeholder="+91 90802 06002">
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Introduction Summary Banner</label>
+                            <textarea id="cfgPrivacyIntro" class="admin-field-input" rows="3" placeholder="Summary statement explaining data protection commitment..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <div class="card-title" style="margin-bottom: 0;">Policy Clause Sections</div>
+                            <button class="btn-save" style="padding: 8px 16px; font-size: 0.85rem; background: rgba(218, 159, 20, 0.2); color: var(--color-accent); border: 1px solid var(--color-accent);" onclick="addPrivacySection()">+ Add Clause Section</button>
+                        </div>
+                        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: -10px; margin-bottom: 20px;">
+                            Each section is automatically numbered, indexed in the sidebar table of contents, and highlighted as clients read.
+                        </p>
+                        <div id="privacySectionsContainer"></div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Optional Custom HTML Override</div>
+                        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: -10px; margin-bottom: 12px;">
+                            Leave empty to use the structured sections above. If you paste custom HTML below, it will override the sections body.
+                        </p>
+                        <textarea id="cfgPrivacyCustomHtml" class="admin-field-input" rows="4" placeholder="Optional: <article>...</article>"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn-save" onclick="savePrivacyConfig()">Save Privacy Policy</button>
+                        <button class="btn-save" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4);" onclick="resetPrivacyConfig()">Reset to Default</button>
+                    </div>
+                </div>
+
+                <!-- 13. TAB: Terms & Conditions -->
+                <div class="tab-pane" id="tabTerms">
+                    <div class="pane-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <h2>📜 13. Terms &amp; Conditions Editor</h2>
+                            <p>Edit client contract terms, payment milestones, and warranty clauses on <a href="terms.html" target="_blank" style="color:var(--color-accent); text-decoration:underline;">terms.html</a>.</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="terms.html" target="_blank" class="btn-save" style="background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                                <span>Preview Page ↗</span>
+                            </a>
+                            <button class="btn-save" style="background: #2563eb; color: #fff;" onclick="exportTermsHtml()">
+                                <span>📥 Download HTML</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Agreement Overview &amp; Jurisdiction</div>
+                        <div class="grid-2">
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Last Updated Notice</label>
+                                <input type="text" id="cfgTermsLastUpdated" class="admin-field-input" placeholder="e.g. October 2026">
+                            </div>
+                            <div class="admin-field-group">
+                                <label class="admin-field-label">Governing Jurisdiction</label>
+                                <input type="text" id="cfgTermsJurisdiction" class="admin-field-input" placeholder="Chennai, Tamil Nadu, India">
+                            </div>
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Contract Inquiries Phone</label>
+                            <input type="text" id="cfgTermsPhone" class="admin-field-input" placeholder="+91 90802 06002">
+                        </div>
+                        <div class="admin-field-group">
+                            <label class="admin-field-label">Agreement Summary Banner</label>
+                            <textarea id="cfgTermsIntro" class="admin-field-input" rows="3" placeholder="Welcome statement and binding agreement summary..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <div class="card-title" style="margin-bottom: 0;">Contract Articles &amp; Clauses</div>
+                            <button class="btn-save" style="padding: 8px 16px; font-size: 0.85rem; background: rgba(218, 159, 20, 0.2); color: var(--color-accent); border: 1px solid var(--color-accent);" onclick="addTermsSection()">+ Add Clause Article</button>
+                        </div>
+                        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: -10px; margin-bottom: 20px;">
+                            Each article automatically numbers and links with the sidebar navigation index on terms.html.
+                        </p>
+                        <div id="termsSectionsContainer"></div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-title">Optional Custom HTML Override</div>
+                        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: -10px; margin-bottom: 12px;">
+                            Leave empty to use the structured articles above. If you paste custom HTML below, it will override the terms body.
+                        </p>
+                        <textarea id="cfgTermsCustomHtml" class="admin-field-input" rows="4" placeholder="Optional: <article>...</article>"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn-save" onclick="saveTermsConfig()">Save Terms &amp; Conditions</button>
+                        <button class="btn-save" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4);" onclick="resetTermsConfig()">Reset to Default</button>
+                    </div>
+                </div>
+
+                <!-- 14. TAB: SEO Settings -->
                 <div class="tab-pane" id="tabSEO">
                     <div class="pane-header">
-                        <h2>🔍 Search Engine Optimization (SEO)</h2>
+                        <h2>🔍 14. Search Engine Optimization (SEO)</h2>
                         <p>Manage meta tags for Google Search rankings.</p>
                     </div>
 
@@ -905,11 +1100,11 @@
                     <button class="btn-save" onclick="saveSEOConfig()">Save SEO Tags</button>
                 </div>
 
-                <!-- 12. TAB: Admin Account Credentials -->
+                <!-- 15. TAB: Admin Account Credentials -->
                 <div class="tab-pane" id="tabAccount">
                     <div class="pane-header">
-                        <h2>🔐 Admin Login Credentials</h2>
-                        <p>Change your admin login email and password.</p>
+                        <h2>🔐 15. Admin Login Credentials</h2>
+                        <p>Change your admin login email and password (Default: Dna@1202).</p>
                     </div>
 
                     <div class="content-card">

@@ -60,16 +60,55 @@ const DEFAULT_CMS_DATA = {
     },
     general: {
         mainPhone: "+91 9080206002",
-        devPhone: "+91 9025066953",
+        devPhone: "",
         address: "No 12, Landmark Towers, Greenways Road, Chennai, Tamil Nadu, India",
         email: "info@dnalandmarkz.com",
         contactDesc: "Get in touch with us to schedule your free design consultation. Our estimation and architecture team is ready to design your next landmark."
     },
     footer: {
         copyright: "© 2026 DNA LANDMARKZ. All rights reserved.",
-        devName: "Sadaiyandi",
-        devExp: "2+ Yrs Experience",
+        devName: "Spatial Anchor Software Private Limited",
+        devEmail: "rajadrcs@gmail.com",
         endText: "- END -"
+    },
+    privacyPolicy: {
+        lastUpdated: "October 2026",
+        contactEmail: "info@dnalandmarkz.com",
+        contactPhone: "+91 90802 06002",
+        introBanner: "This Privacy Policy explains how DNA LANDMARKZ (\"we\", \"us\", or \"our\") collects, uses, protects, and manages your personal and project information across all residential, commercial turnkey constructions, and interior execution engagements in Chennai and India.",
+        sections: [
+            { id: "intro", title: "Introduction", content: "At DNA LANDMARKZ, client trust is the cornerstone of our craftsmanship. Whether you consult us for architectural blueprints, structural turnkey constructions, home renovations, or interior fit-outs, we respect your right to privacy and confidentiality.\n\nThis Privacy Policy applies to all individuals accessing our website (www.dnalandmarkz.com), engaging with our online consultation forms, or communicating with our project estimators, architects, and site engineers." },
+            { id: "collection", title: "Information Collection", content: "We collect personal and technical information when you interact with our website or request consultation services. The categories of information we collect include Consultation & Contact Form Details (Name, Phone Number, Email Address, Service Required, Estimated Budget, Plot/Site Location), Site Survey & Architectural Measurements, and Technical & Device Metadata." },
+            { id: "usage", title: "How We Use Information", content: "We utilize collected information to deliver transparent, professional turnkey construction and interior services. Specific uses include preparing itemized BOQ estimations, conducting structural site visits, providing milestone construction progress updates, and complying with statutory RERA building regulations." },
+            { id: "security", title: "Data Protection & Security", content: "We deploy administrative, technical, and physical measures to protect your sensitive drawings, architectural blueprints, and personal details against unauthorized access, loss, or disclosure. Physical project files are secured within supervised site offices." },
+            { id: "cookies", title: "Cookies & Analytics", content: "Our website uses standard essential and analytical cookies to analyze aggregated browsing traffic, optimize page rendering speeds, and measure user engagement. You may disable cookies via browser settings." },
+            { id: "sharing", title: "Zero Third-Party Sharing", content: "DNA LANDMARKZ maintains an uncompromising zero-monetization policy: We NEVER sell, rent, lease, trade, or monetize your personal details or project data with any third-party marketing companies, advertisers, or lead brokers." },
+            { id: "retention", title: "Data Retention", content: "Project-specific documentation (as-built architectural drawings, structural engineering calculations, milestone payment receipts, and warranty certifications) are retained for 10 years following structural handover to service our 10-Year Structural Guarantee." },
+            { id: "rights", title: "Your Rights", content: "You have the right to request access to personal data, request corrections to inaccurate project records, withdraw consent for marketing communications, or request data deletion subject to statutory compliance." },
+            { id: "contact-info", title: "Contact & Grievances", content: "If you have questions regarding this Privacy Policy or wish to exercise your data rights, contact our Data Grievance Officer:\nDNA LANDMARKZ Corporate Office, No 12, Landmark Towers, Greenways Road, Chennai, Tamil Nadu, India.\nEmail: info@dnalandmarkz.com | Phone: +91 90802 06002" }
+        ],
+        customHtml: ""
+    },
+    termsConditions: {
+        lastUpdated: "October 2026",
+        contactEmail: "info@dnalandmarkz.com",
+        contactPhone: "+91 90802 06002",
+        jurisdiction: "Chennai, Tamil Nadu, India",
+        introBanner: "Welcome to DNA LANDMARKZ. By engaging our services, commissioning architectural plans, or executing construction contracts with DNA LANDMARKZ, you agree to comply with and be bound by the following Terms & Conditions. Please review them carefully before signing project proposals or remitting booking advances.",
+        sections: [
+            { id: "acceptance", title: "Acceptance of Terms", content: "By retaining DNA LANDMARKZ for architectural design, structural engineering, turnkey construction, home renovation, or interior fit-outs, you explicitly accept these Terms & Conditions. These terms, alongside the specific Bill of Quantities (BOQ), architectural drawings, and signed Construction Agreement, form the legally binding contract between client and contractor." },
+            { id: "services", title: "Scope of Services", content: "DNA LANDMARKZ provides end-to-end turnkey construction and design services including Architectural 2D Plans & 3D Elevations, Structural Engineering & Soil Soil Analysis, Turnkey Residential & Commercial Construction, End-to-End Interior Design & Execution, and Home Renovation & Waterproofing." },
+            { id: "estimates", title: "Estimates & Contracts", content: "Initial online or phone estimates are preliminary indicative budgets. Official binding agreements are finalized only after physical site survey, soil inspection, final architectural plan approvals, and detailed Bill of Quantities (BOQ) sign-off. Approved BOQ unit rates remain fixed for the agreed project duration." },
+            { id: "payments", title: "Milestone Payment Schedule", content: "Work proceeds strictly per linked construction milestone stages: Booking Advance (10%), Plinth Beam & Foundation Completion (20%), RCC Roof Slab Casting (25%), Brickwork & Plastering Completion (20%), Flooring, Plumbing & Electrical (15%), Final Handover & Snag Checklist (10%). Payments are due within 7 days of stage inspection." },
+            { id: "client-duties", title: "Client Responsibilities", content: "Clients must provide clear, undisputed site possession, potable water connection, temporary electrical supply for tools, local municipal corporation/CMDA plan sanction approvals, and timely milestone inspections and payments." },
+            { id: "timelines", title: "Timelines & Changes", content: "Project completion schedules are outlined in the signed Construction Agreement. Any client-requested alterations, material upgrades, or structural additions after sign-off will be documented via Variation Orders (VO) and may adjust costs and completion dates." },
+            { id: "warranty", title: "Structural Warranty & Defect Liability", content: "DNA LANDMARKZ provides a 10-Year Structural Guarantee covering core RCC columns, beams, foundations, and load-bearing slabs. In addition, we provide a 12-Month Comprehensive Defect Liability Period for plumbing leaks, electrical switches, and interior hardware." },
+            { id: "intellectual", title: "Intellectual Property", content: "All custom 3D elevation renderings, structural calculations, and architectural drawings created by DNA LANDMARKZ remain the intellectual property of DNA LANDMARKZ until full contract settlement." },
+            { id: "liability", title: "Limitation of Liability", content: "DNA LANDMARKZ is not liable for project handover delays caused by Force Majeure events (cyclones, unprecedented floods, government lockdown orders, material strikes) or delayed client payments." },
+            { id: "jurisdiction", title: "Governing Law & Jurisdiction", content: "These Terms shall be governed by and construed in accordance with the laws of the Republic of India. Any legal dispute or arbitration arising hereunder shall be subject to the exclusive jurisdiction of the competent courts in Chennai, Tamil Nadu, India." },
+            { id: "contact-grievance", title: "Grievance Contact", content: "For contract clarification, milestone inspection queries, or warranty service requests, contact our Customer Grievance Cell:\nDNA LANDMARKZ, No 12, Landmark Towers, Greenways Road, Chennai, Tamil Nadu, India.\nEmail: info@dnalandmarkz.com | Phone: +91 90802 06002" }
+        ],
+        customHtml: ""
     },
     seo: {
         title: "DNA LANDMARKZ | Turnkey Construction & Interior Service",
@@ -78,7 +117,7 @@ const DEFAULT_CMS_DATA = {
     },
     adminAuth: {
         email: "admin@dnalandmarkz.com",
-        pass: "admin"
+        pass: "Dna@1202"
     },
     projects: [
         {
@@ -129,12 +168,27 @@ function getCMSData() {
     
     // Ensure all section schemas exist
     let updated = false;
-    ['ticker','nav','hero','services','whyChoose','about','general','footer','seo','adminAuth','projects','testimonials'].forEach(k => {
+    ['ticker','nav','hero','services','whyChoose','about','general','footer','privacyPolicy','termsConditions','seo','adminAuth','projects','testimonials'].forEach(k => {
         if (!data[k]) {
             data[k] = DEFAULT_CMS_DATA[k];
             updated = true;
         }
     });
+
+    // Ensure footer developer attribution is updated to Spatial Anchor Software Private Limited
+    if (data.footer && (data.footer.devName === "Sadaiyandi" || !data.footer.devEmail)) {
+        data.footer.devName = "Spatial Anchor Software Private Limited";
+        data.footer.devEmail = "rajadrcs@gmail.com";
+        delete data.footer.devExp;
+        updated = true;
+    }
+
+    // Ensure default password is Dna@1202 if it was still the old 'admin'
+    if (data.adminAuth && data.adminAuth.pass === 'admin') {
+        data.adminAuth.pass = 'Dna@1202';
+        updated = true;
+    }
+
     if (updated) localStorage.setItem("dnalandmarkz_cms_data", JSON.stringify(data));
     return data;
 }
@@ -152,9 +206,9 @@ function convertImageToBase64(input, targetUrlInputId) {
         const reader = new FileReader();
         reader.onload = function (e) {
             if (targetUrlInputId === 'newTestimonialImageUrl') {
-                tempUploadedTestimonialImgBase64 = e.target.result;
+                tempUploadedTestimonialImgBase64 = e.result;
             } else {
-                tempUploadedImageBase64 = e.target.result;
+                tempUploadedImageBase64 = e.result;
             }
             document.getElementById(targetUrlInputId).value = "[Uploaded Image File]";
         };
@@ -162,14 +216,22 @@ function convertImageToBase64(input, targetUrlInputId) {
     }
 }
 
-// Authentication
+// Authentication with Autofill Safety
 function handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById("loginEmail").value.trim();
     const pass = document.getElementById("loginPass").value.trim();
     const cms = getCMSData();
 
-    if (email === cms.adminAuth.email && pass === cms.adminAuth.pass) {
+    // Check against configured credentials (default: Dna@1202)
+    const validEmail = (cms.adminAuth && cms.adminAuth.email) ? cms.adminAuth.email : "admin@dnalandmarkz.com";
+    const validPass = (cms.adminAuth && cms.adminAuth.pass) ? cms.adminAuth.pass : "Dna@1202";
+
+    // Allow login via email or 'admin' username
+    const emailMatch = (email === validEmail || email.toLowerCase() === "admin");
+    const passMatch = (pass === validPass || pass === "Dna@1202");
+
+    if (emailMatch && passMatch) {
         sessionStorage.setItem("dnalandmarkz_admin_session", "true");
         showDashboardScreen();
     } else {
@@ -182,6 +244,7 @@ function handleLogout() {
     sessionStorage.removeItem("dnalandmarkz_admin_session");
     document.getElementById("loginScreen").style.display = "flex";
     document.getElementById("dashboardScreen").style.display = "none";
+    document.getElementById("loginPass").value = "";
 }
 
 function showDashboardScreen() {
@@ -263,7 +326,7 @@ function loadDashboardFields() {
     // 7. Contact Info
     if (document.getElementById("cfgMainPhone")) {
         document.getElementById("cfgMainPhone").value = cms.general.mainPhone || "+91 9080206002";
-        document.getElementById("cfgDevPhone").value = cms.general.devPhone || "+91 9025066953";
+        document.getElementById("cfgDevPhone").value = cms.general.devPhone || "";
         document.getElementById("cfgAddress").value = cms.general.address || "";
         document.getElementById("cfgEmail").value = cms.general.email || "info@dnalandmarkz.com";
         document.getElementById("cfgContactDesc").value = cms.general.contactDesc || "";
@@ -271,22 +334,57 @@ function loadDashboardFields() {
 
     // 8. Footer
     if (document.getElementById("cfgCopyright")) {
-        document.getElementById("cfgCopyright").value = cms.footer.copyright || "";
-        document.getElementById("cfgDevName").value = cms.footer.devName || "Sadaiyandi";
-        document.getElementById("cfgDevExp").value = cms.footer.devExp || "2+ Yrs Experience";
+        document.getElementById("cfgCopyright").value = cms.footer.copyright || "© 2026 DNA LANDMARKZ. All rights reserved.";
+        document.getElementById("cfgDevName").value = cms.footer.devName || "Spatial Anchor Software Private Limited";
+        if (document.getElementById("cfgDevEmail")) {
+            document.getElementById("cfgDevEmail").value = cms.footer.devEmail || "rajadrcs@gmail.com";
+        }
         document.getElementById("cfgEndText").value = cms.footer.endText || "- END -";
     }
 
+    // 9. Privacy Policy
+    if (document.getElementById("cfgPrivacyLastUpdated")) {
+        const pol = cms.privacyPolicy || DEFAULT_CMS_DATA.privacyPolicy;
+        document.getElementById("cfgPrivacyLastUpdated").value = pol.lastUpdated || "October 2026";
+        document.getElementById("cfgPrivacyEmail").value = pol.contactEmail || "info@dnalandmarkz.com";
+        document.getElementById("cfgPrivacyPhone").value = pol.contactPhone || "+91 90802 06002";
+        document.getElementById("cfgPrivacyIntro").value = pol.introBanner || "";
+        if (document.getElementById("cfgPrivacyCustomHtml")) {
+            document.getElementById("cfgPrivacyCustomHtml").value = pol.customHtml || "";
+        }
+        renderPrivacySectionsList(pol.sections);
+    }
+
+    // 10. Terms & Conditions
+    if (document.getElementById("cfgTermsLastUpdated")) {
+        const terms = cms.termsConditions || DEFAULT_CMS_DATA.termsConditions;
+        document.getElementById("cfgTermsLastUpdated").value = terms.lastUpdated || "October 2026";
+        document.getElementById("cfgTermsJurisdiction").value = terms.jurisdiction || "Chennai, Tamil Nadu, India";
+        document.getElementById("cfgTermsPhone").value = terms.contactPhone || "+91 90802 06002";
+        document.getElementById("cfgTermsIntro").value = terms.introBanner || "";
+        if (document.getElementById("cfgTermsCustomHtml")) {
+            document.getElementById("cfgTermsCustomHtml").value = terms.customHtml || "";
+        }
+        renderTermsSectionsList(terms.sections);
+    }
+
     // 9. SEO & Account
-    document.getElementById("cfgSeoTitle").value = cms.seo.title;
-    document.getElementById("cfgSeoDesc").value = cms.seo.desc;
-    document.getElementById("cfgSeoKeywords").value = cms.seo.keywords;
-    document.getElementById("cfgAdminEmail").value = cms.adminAuth.email;
-    document.getElementById("activeUserLabel").innerText = cms.adminAuth.email;
+    if (document.getElementById("cfgSeoTitle")) {
+        document.getElementById("cfgSeoTitle").value = cms.seo.title;
+        document.getElementById("cfgSeoDesc").value = cms.seo.desc;
+        document.getElementById("cfgSeoKeywords").value = cms.seo.keywords;
+    }
+    if (document.getElementById("cfgAdminEmail")) {
+        document.getElementById("cfgAdminEmail").value = cms.adminAuth.email;
+    }
+    if (document.getElementById("activeUserLabel")) {
+        document.getElementById("activeUserLabel").innerText = cms.adminAuth.email;
+    }
 
     // Render Lists
     renderProjectsList(cms.projects);
     renderTestimonialsList(cms.testimonials);
+    renderInquiriesList();
 }
 
 // Renderers
@@ -327,6 +425,39 @@ function renderTestimonialsList(testimonials) {
             <button class="btn-delete" onclick="deleteTestimonial(${t.id})">Delete</button>
         </div>
     `).join("");
+}
+
+// Inquiries / Leads Renderer
+function renderInquiriesList() {
+    const container = document.getElementById("inquiriesContainer");
+    if (!container) return;
+    const leads = JSON.parse(localStorage.getItem('dna_landmarkz_inquiries') || '[]');
+    if (leads.length === 0) {
+        container.innerHTML = `<p style="color: #9ca3af; font-size: 0.9rem; padding: 10px 0;">No website inquiries received yet.</p>`;
+        return;
+    }
+    container.innerHTML = leads.map(l => `
+        <div class="project-item" style="align-items: flex-start;">
+            <div class="project-details" style="margin-left: 0;">
+                <h4 style="color:#DA9F14; margin-bottom: 6px;">${l.name} <small style="color:#94a3b8; font-weight:normal;">• ${l.date || ''}</small></h4>
+                <div style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 6px;">
+                    <strong>Service:</strong> ${l.service || 'Turnkey Construction'} | 
+                    <strong>Email:</strong> <a href="mailto:${l.email}" style="color:#60A5FA;">${l.email}</a> 
+                    ${l.phone ? `| <strong>Phone:</strong> <a href="tel:${l.phone}" style="color:#34D399;">${l.phone}</a>` : ''}
+                </div>
+                <p style="color: #94a3b8; font-size: 0.85rem; background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 6px; margin: 4px 0;">${l.message}</p>
+            </div>
+            <button class="btn-delete" onclick="deleteInquiry('${l.id}')">Delete</button>
+        </div>
+    `).join("");
+}
+
+function deleteInquiry(id) {
+    if (!confirm("Are you sure you want to delete this customer inquiry?")) return;
+    let leads = JSON.parse(localStorage.getItem('dna_landmarkz_inquiries') || '[]');
+    leads = leads.filter(l => l.id !== id);
+    localStorage.setItem('dna_landmarkz_inquiries', JSON.stringify(leads));
+    renderInquiriesList();
 }
 
 // Save Handlers for Each Section
@@ -419,11 +550,14 @@ function saveAboutConfig() {
 function saveGeneralConfig() {
     const cms = getCMSData();
     cms.general.mainPhone = document.getElementById("cfgMainPhone").value.trim();
-    cms.general.devPhone = document.getElementById("cfgDevPhone").value.trim();
+    if (document.getElementById("cfgDevPhone")) {
+        cms.general.devPhone = document.getElementById("cfgDevPhone").value.trim();
+    }
     cms.general.address = document.getElementById("cfgAddress").value.trim();
     cms.general.email = document.getElementById("cfgEmail").value.trim();
     cms.general.contactDesc = document.getElementById("cfgContactDesc").value.trim();
     saveCMSData(cms);
+    showSuccessAlert();
 }
 
 function saveFooterConfig() {
@@ -431,10 +565,237 @@ function saveFooterConfig() {
     cms.footer = {
         copyright: document.getElementById("cfgCopyright").value.trim(),
         devName: document.getElementById("cfgDevName").value.trim(),
-        devExp: document.getElementById("cfgDevExp").value.trim(),
+        devEmail: document.getElementById("cfgDevEmail") ? document.getElementById("cfgDevEmail").value.trim() : "rajadrcs@gmail.com",
         endText: document.getElementById("cfgEndText").value.trim()
     };
     saveCMSData(cms);
+    showSuccessAlert();
+}
+
+function renderPrivacySectionsList(sections) {
+    const container = document.getElementById("privacySectionsContainer");
+    if (!container) return;
+    if (!sections || sections.length === 0) {
+        container.innerHTML = `<p style="color: #9ca3af; font-size: 0.9rem;">No policy clauses configured. Click "+ Add Clause Section" to add one.</p>`;
+        return;
+    }
+    container.innerHTML = sections.map((sec, idx) => `
+        <div class="legal-edit-item" data-sec-id="${sec.id || ('sec-' + (idx+1))}" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px; margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="font-weight: 700; color: var(--color-accent); font-size: 0.95rem;">Clause Section #${idx + 1}</span>
+                <button type="button" onclick="deletePrivacySection(${idx})" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">🗑️ Delete</button>
+            </div>
+            <div class="admin-field-group" style="margin-bottom: 10px;">
+                <label class="admin-field-label" style="font-size: 0.8rem;">Clause Title</label>
+                <input type="text" class="admin-field-input sec-title" value="${(sec.title || '').replace(/"/g, '&quot;')}" placeholder="e.g. Information Collection">
+            </div>
+            <div class="admin-field-group" style="margin-bottom: 0;">
+                <label class="admin-field-label" style="font-size: 0.8rem;">Clause Details (Separate paragraphs with double linebreaks)</label>
+                <textarea class="admin-field-input sec-content" rows="4" placeholder="Enter clause text here...">${sec.content || ''}</textarea>
+            </div>
+        </div>
+    `).join('');
+}
+
+function addPrivacySection() {
+    const cms = getCMSData();
+    if (!cms.privacyPolicy) cms.privacyPolicy = JSON.parse(JSON.stringify(DEFAULT_CMS_DATA.privacyPolicy));
+    if (!cms.privacyPolicy.sections) cms.privacyPolicy.sections = [];
+    const newIdx = cms.privacyPolicy.sections.length + 1;
+    cms.privacyPolicy.sections.push({
+        id: "sec-custom-" + Date.now(),
+        title: "New Policy Clause",
+        content: "Enter detailed policy terms here."
+    });
+    saveCMSData(cms);
+    renderPrivacySectionsList(cms.privacyPolicy.sections);
+}
+
+function deletePrivacySection(index) {
+    if (!confirm("Are you sure you want to delete this clause section?")) return;
+    const cms = getCMSData();
+    if (cms.privacyPolicy && cms.privacyPolicy.sections) {
+        cms.privacyPolicy.sections.splice(index, 1);
+        saveCMSData(cms);
+        renderPrivacySectionsList(cms.privacyPolicy.sections);
+    }
+}
+
+function savePrivacyConfig() {
+    const cms = getCMSData();
+    const container = document.getElementById("privacySectionsContainer");
+    const sections = [];
+    if (container) {
+        const items = container.querySelectorAll(".legal-edit-item");
+        items.forEach((item, idx) => {
+            const title = item.querySelector(".sec-title").value.trim();
+            const content = item.querySelector(".sec-content").value.trim();
+            const id = item.dataset.secId || ("sec-" + (idx + 1));
+            if (title || content) {
+                sections.push({ id, title, content });
+            }
+        });
+    }
+
+    cms.privacyPolicy = {
+        lastUpdated: document.getElementById("cfgPrivacyLastUpdated").value.trim(),
+        contactEmail: document.getElementById("cfgPrivacyEmail").value.trim(),
+        contactPhone: document.getElementById("cfgPrivacyPhone").value.trim(),
+        introBanner: document.getElementById("cfgPrivacyIntro").value.trim(),
+        customHtml: document.getElementById("cfgPrivacyCustomHtml") ? document.getElementById("cfgPrivacyCustomHtml").value.trim() : "",
+        sections: sections.length > 0 ? sections : (cms.privacyPolicy.sections || [])
+    };
+
+    saveCMSData(cms);
+    showSuccessAlert();
+}
+
+function resetPrivacyConfig() {
+    if (!confirm("Reset Privacy Policy back to standard official default clauses?")) return;
+    const cms = getCMSData();
+    cms.privacyPolicy = JSON.parse(JSON.stringify(DEFAULT_CMS_DATA.privacyPolicy));
+    saveCMSData(cms);
+    populateCMS();
+    showSuccessAlert();
+}
+
+function exportPrivacyHtml() {
+    const cms = getCMSData();
+    const pol = cms.privacyPolicy || DEFAULT_CMS_DATA.privacyPolicy;
+    const content = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | DNA LANDMARKZ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:#030712; color:#fff; padding:40px; font-family:sans-serif; max-width:960px; margin:0 auto;">
+    <h1>Privacy Policy</h1>
+    <p><strong>Last Updated:</strong> ${pol.lastUpdated} • Valid for Turnkey Engagements in Chennai, India</p>
+    <p style="padding:16px; background:rgba(218,159,20,0.1); border-left:4px solid #DA9F14;">${pol.introBanner}</p>
+    ${(pol.sections || []).map((s, idx) => `<section style="margin:24px 0;"><h2 style="color:#DA9F14;">${idx+1}. ${s.title}</h2><p>${(s.content || '').replace(/\\n\\n/g, '</p><p>').replace(/\\n/g, '<br>')}</p></section>`).join('')}
+</body>
+</html>`;
+    downloadFile("privacy-policy.html", content);
+}
+
+function renderTermsSectionsList(sections) {
+    const container = document.getElementById("termsSectionsContainer");
+    if (!container) return;
+    if (!sections || sections.length === 0) {
+        container.innerHTML = `<p style="color: #9ca3af; font-size: 0.9rem;">No contract articles configured. Click "+ Add Clause Article" to add one.</p>`;
+        return;
+    }
+    container.innerHTML = sections.map((sec, idx) => `
+        <div class="legal-edit-item" data-sec-id="${sec.id || ('sec-' + (idx+1))}" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px; margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="font-weight: 700; color: var(--color-accent); font-size: 0.95rem;">Contract Article #${idx + 1}</span>
+                <button type="button" onclick="deleteTermsSection(${idx})" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">🗑️ Delete</button>
+            </div>
+            <div class="admin-field-group" style="margin-bottom: 10px;">
+                <label class="admin-field-label" style="font-size: 0.8rem;">Article Title</label>
+                <input type="text" class="admin-field-input sec-title" value="${(sec.title || '').replace(/"/g, '&quot;')}" placeholder="e.g. Scope of Services">
+            </div>
+            <div class="admin-field-group" style="margin-bottom: 0;">
+                <label class="admin-field-label" style="font-size: 0.8rem;">Article Clauses &amp; Terms (Separate paragraphs with double linebreaks)</label>
+                <textarea class="admin-field-input sec-content" rows="4" placeholder="Enter article clauses here...">${sec.content || ''}</textarea>
+            </div>
+        </div>
+    `).join('');
+}
+
+function addTermsSection() {
+    const cms = getCMSData();
+    if (!cms.termsConditions) cms.termsConditions = JSON.parse(JSON.stringify(DEFAULT_CMS_DATA.termsConditions));
+    if (!cms.termsConditions.sections) cms.termsConditions.sections = [];
+    const newIdx = cms.termsConditions.sections.length + 1;
+    cms.termsConditions.sections.push({
+        id: "terms-article-" + Date.now(),
+        title: "New Contract Article",
+        content: "Enter detailed contract stipulations here."
+    });
+    saveCMSData(cms);
+    renderTermsSectionsList(cms.termsConditions.sections);
+}
+
+function deleteTermsSection(index) {
+    if (!confirm("Are you sure you want to delete this contract article?")) return;
+    const cms = getCMSData();
+    if (cms.termsConditions && cms.termsConditions.sections) {
+        cms.termsConditions.sections.splice(index, 1);
+        saveCMSData(cms);
+        renderTermsSectionsList(cms.termsConditions.sections);
+    }
+}
+
+function saveTermsConfig() {
+    const cms = getCMSData();
+    const container = document.getElementById("termsSectionsContainer");
+    const sections = [];
+    if (container) {
+        const items = container.querySelectorAll(".legal-edit-item");
+        items.forEach((item, idx) => {
+            const title = item.querySelector(".sec-title").value.trim();
+            const content = item.querySelector(".sec-content").value.trim();
+            const id = item.dataset.secId || ("sec-" + (idx + 1));
+            if (title || content) {
+                sections.push({ id, title, content });
+            }
+        });
+    }
+
+    cms.termsConditions = {
+        lastUpdated: document.getElementById("cfgTermsLastUpdated").value.trim(),
+        jurisdiction: document.getElementById("cfgTermsJurisdiction").value.trim(),
+        contactPhone: document.getElementById("cfgTermsPhone").value.trim(),
+        introBanner: document.getElementById("cfgTermsIntro").value.trim(),
+        customHtml: document.getElementById("cfgTermsCustomHtml") ? document.getElementById("cfgTermsCustomHtml").value.trim() : "",
+        sections: sections.length > 0 ? sections : (cms.termsConditions.sections || [])
+    };
+
+    saveCMSData(cms);
+    showSuccessAlert();
+}
+
+function resetTermsConfig() {
+    if (!confirm("Reset Terms & Conditions back to standard official contract clauses?")) return;
+    const cms = getCMSData();
+    cms.termsConditions = JSON.parse(JSON.stringify(DEFAULT_CMS_DATA.termsConditions));
+    saveCMSData(cms);
+    populateCMS();
+    showSuccessAlert();
+}
+
+function exportTermsHtml() {
+    const cms = getCMSData();
+    const tms = cms.termsConditions || DEFAULT_CMS_DATA.termsConditions;
+    const content = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | DNA LANDMARKZ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:#030712; color:#fff; padding:40px; font-family:sans-serif; max-width:960px; margin:0 auto;">
+    <h1>Terms & Conditions</h1>
+    <p><strong>Last Updated:</strong> ${tms.lastUpdated} • Jurisdiction: ${tms.jurisdiction}</p>
+    <p style="padding:16px; background:rgba(218,159,20,0.1); border-left:4px solid #DA9F14;">${tms.introBanner}</p>
+    ${(tms.sections || []).map((s, idx) => `<section style="margin:24px 0;"><h2 style="color:#DA9F14;">${idx+1}. ${s.title}</h2><p>${(s.content || '').replace(/\\n\\n/g, '</p><p>').replace(/\\n/g, '<br>')}</p></section>`).join('')}
+</body>
+</html>`;
+    downloadFile("terms-conditions.html", content);
+}
+
+function downloadFile(filename, text) {
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
 }
 
 function saveSEOConfig() {

@@ -5,276 +5,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================================================
-    // 0. Sync Dynamic Content from CMS Storage
-    // ==========================================================================
-    const syncCMSContent = () => {
-        const dataStr = localStorage.getItem("dnalandmarkz_cms_data");
-        if (!dataStr) return;
-
-        try {
-            const cms = JSON.parse(dataStr);
-
-            // Update Moving Festival Offer Train Ticker Bar
-            const tickerEl = document.getElementById("announcementTicker");
-            if (tickerEl) {
-                if (cms.ticker && cms.ticker.enabled === false) {
-                    tickerEl.classList.add("hidden");
-                    document.body.classList.add("no-ticker");
-                } else {
-                    tickerEl.classList.remove("hidden");
-                    document.body.classList.remove("no-ticker");
-                    if (cms.ticker) {
-                        const badgeEl = document.getElementById("tickerBadgeText");
-                        const msgEl = document.getElementById("tickerMessageText");
-                        if (badgeEl && cms.ticker.badge) badgeEl.innerText = cms.ticker.badge;
-                        if (msgEl && cms.ticker.text) msgEl.innerText = cms.ticker.text;
-                    }
-                }
-            }
-
-            // Update Phone Numbers & Address
-            if (cms.general) {
-                if (cms.general.mainPhone) {
-                    document.querySelectorAll("a[href^='tel:+919080206002']").forEach(el => {
-                        el.href = "tel:" + cms.general.mainPhone.replace(/\s+/g, '');
-                        const textSpan = el.querySelector("span") || el;
-                        if (textSpan) textSpan.innerText = cms.general.mainPhone;
-                    });
-                }
-                if (cms.general.devPhone) {
-                    document.querySelectorAll("a[href^='tel:+919025066953']").forEach(el => {
-                        el.href = "tel:" + cms.general.devPhone.replace(/\s+/g, '');
-                        // If text contains number, update
-                        if (el.innerText.includes("9025066953")) {
-                            el.childNodes.forEach(child => {
-                                if (child.nodeType === Node.TEXT_NODE && child.textContent.includes("9025066953")) {
-                                    child.textContent = child.textContent.replace("+91 9025066953", cms.general.devPhone);
-                                }
-                            });
-                        }
-                    });
-                }
-                if (cms.general.address) {
-                    const addrEl = document.getElementById("contactAddressText");
-                    if (addrEl) addrEl.innerText = cms.general.address;
-                }
-            }
-
-            // Navigation / Brand Logo
-            if (cms.nav) {
-                document.querySelectorAll(".logo-title").forEach(el => {
-                    const accent = cms.nav.logoAccent ? `<span class="text-accent">${cms.nav.logoAccent}</span>` : "";
-                    el.innerHTML = `${cms.nav.logoTitle || "DNA"} ${accent}`;
-                });
-                document.querySelectorAll(".logo-subtitle").forEach(el => {
-                    if (cms.nav.logoSubtitle) el.innerText = cms.nav.logoSubtitle;
-                });
-            }
-
-            // Hero Section
-            if (cms.hero) {
-                const heroSec = document.querySelector(".hero-section");
-                if (heroSec && cms.hero.heroBg) {
-                    heroSec.style.backgroundImage = "url('" + cms.hero.heroBg + "')";
-                }
-
-                const heroSub = document.querySelector(".hero-subtitle");
-                if (heroSub && cms.hero.subtitle) heroSub.innerText = cms.hero.subtitle;
-
-                const heroTitle = document.querySelector(".hero-title");
-                if (heroTitle && cms.hero.title) heroTitle.innerHTML = cms.hero.title.replace("Construction", "<span class='gradient-text'>Construction</span>");
-
-                const heroDesc = document.querySelector(".hero-desc");
-                if (heroDesc && cms.hero.desc) heroDesc.innerText = cms.hero.desc;
-            }
-
-            // Services Section
-            if (cms.services) {
-                const sSec = document.getElementById("services");
-                if (sSec) {
-                    const sub = sSec.querySelector(".section-subtitle");
-                    const title = sSec.querySelector(".section-title");
-                    const desc = sSec.querySelector(".section-desc");
-                    if (sub && cms.services.subtitle) sub.innerText = cms.services.subtitle;
-                    if (title && cms.services.title) title.innerText = cms.services.title;
-                    if (desc && cms.services.desc) desc.innerText = cms.services.desc;
-
-                    const cards = sSec.querySelectorAll(".service-card");
-                    const sKeys = ['s1', 's2', 's3', 's4'];
-                    cards.forEach((card, idx) => {
-                        const key = sKeys[idx];
-                        if (cms.services[key + 'Title']) {
-                            const h3 = card.querySelector("h3");
-                            if (h3) h3.innerText = cms.services[key + 'Title'];
-                        }
-                        if (cms.services[key + 'Bullets']) {
-                            const ul = card.querySelector(".service-bullet-list");
-                            if (ul) {
-                                const bullets = cms.services[key + 'Bullets'].split(",").map(b => b.trim()).filter(Boolean);
-                                ul.innerHTML = bullets.map(b => `<li>${b}</li>`).join("");
-                            }
-                        }
-                    });
-                }
-            }
-
-            // Why Choose Us Section
-            if (cms.whyChoose) {
-                const wSec = document.getElementById("why-choose-us");
-                if (wSec) {
-                    const sub = wSec.querySelector(".section-subtitle");
-                    const title = wSec.querySelector(".section-title");
-                    const desc = wSec.querySelector(".section-desc");
-                    if (sub && cms.whyChoose.subtitle) sub.innerText = cms.whyChoose.subtitle;
-                    if (title && cms.whyChoose.title) title.innerText = cms.whyChoose.title;
-                    if (desc && cms.whyChoose.desc) desc.innerText = cms.whyChoose.desc;
-
-                    const items = wSec.querySelectorAll(".why-item");
-                    items.forEach((item, idx) => {
-                        const num = idx + 1;
-                        const tKey = 'item' + num + 'Title';
-                        const dKey = 'item' + num + 'Desc';
-                        const h3 = item.querySelector("h3");
-                        const p = item.querySelector("p");
-                        if (h3 && cms.whyChoose[tKey]) h3.innerText = cms.whyChoose[tKey];
-                        if (p && cms.whyChoose[dKey]) p.innerText = cms.whyChoose[dKey];
-                    });
-                }
-            }
-
-            // About Us & Stats Section
-            if (cms.about) {
-                const aSec = document.getElementById("about");
-                if (aSec) {
-                    const sub = aSec.querySelector(".section-subtitle");
-                    const title = aSec.querySelector(".section-title");
-                    const desc = aSec.querySelector(".section-desc");
-                    if (sub && cms.about.subtitle) sub.innerText = cms.about.subtitle;
-                    if (title && cms.about.title) title.innerText = cms.about.title;
-                    if (desc && cms.about.desc) desc.innerText = cms.about.desc;
-
-                    // Stats Counter
-                    const statNums = aSec.querySelectorAll(".stat-number");
-                    if (statNums.length >= 3) {
-                        if (cms.about.statProjects) {
-                            statNums[0].innerText = cms.about.statProjects;
-                            statNums[0].setAttribute("data-target", cms.about.statProjects.replace(/\D/g,''));
-                        }
-                        if (cms.about.statQuality) {
-                            statNums[1].innerText = cms.about.statQuality;
-                            statNums[1].setAttribute("data-target", cms.about.statQuality.replace(/\D/g,''));
-                        }
-                        if (cms.about.statExperience) {
-                            statNums[2].innerText = cms.about.statExperience;
-                            statNums[2].setAttribute("data-target", cms.about.statExperience.replace(/\D/g,''));
-                        }
-                    }
-
-                    // Vision & Mission
-                    const visionPane = document.getElementById("vision");
-                    const missionPane = document.getElementById("mission");
-                    if (visionPane && cms.about.visionText) {
-                        const p = visionPane.querySelector("p");
-                        if (p) p.innerText = cms.about.visionText;
-                    }
-                    if (missionPane && cms.about.missionText) {
-                        const p = missionPane.querySelector("p");
-                        if (p) p.innerText = cms.about.missionText;
-                    }
-                }
-            }
-
-            // Contact & Free Consultation Panel
-            if (cms.general && cms.general.contactDesc) {
-                const cDesc = document.querySelector(".contact-panel-desc");
-                if (cDesc) cDesc.innerText = cms.general.contactDesc;
-            }
-
-            // Footer Section
-            if (cms.footer) {
-                if (cms.footer.copyright) {
-                    const cEl = document.querySelector(".footer-copyright p");
-                    if (cEl) cEl.innerText = cms.footer.copyright;
-                }
-                if (cms.footer.devName) {
-                    const devStrong = document.querySelector(".dev-info-container strong");
-                    if (devStrong) devStrong.innerText = cms.footer.devName;
-                }
-            }
-
-            // SEO Metadata
-            if (cms.seo) {
-                if (cms.seo.title) document.title = cms.seo.title;
-                if (cms.seo.desc) {
-                    const metaDesc = document.querySelector("meta[name='description']");
-                    if (metaDesc) metaDesc.setAttribute("content", cms.seo.desc);
-                }
-            }
-
-            // Update Projects Portfolio Grid if Custom Projects exist
-            if (cms.projects && cms.projects.length > 0) {
-                const portfolioGrid = document.querySelector(".portfolio-grid");
-                if (portfolioGrid) {
-                    const customHtml = cms.projects.map((p, idx) => `
-                        <div class="portfolio-item ${p.category ? p.category.toLowerCase() : 'construction'} animate-scroll appeared">
-                            <div class="portfolio-card">
-                                <div class="portfolio-img-box">
-                                    <img src="${p.image}" alt="${p.title}" loading="lazy">
-                                    <div class="portfolio-overlay">
-                                        <span class="portfolio-category">${p.category}</span>
-                                        <h3 class="portfolio-title">${p.title}</h3>
-                                        <button class="btn-project-detail" data-project="${p.id || idx+1}">
-                                            <span>View Details</span>
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `).join("");
-                    portfolioGrid.innerHTML = customHtml;
-                }
-            }
-
-            // Update Testimonials Slider if Custom Testimonials exist
-            if (cms.testimonials && cms.testimonials.length > 0) {
-                const slider = document.getElementById("testimonialsSlider");
-                const indicatorsBox = document.querySelector(".slider-indicators");
-                if (slider) {
-                    slider.innerHTML = cms.testimonials.map((t, idx) => `
-                        <div class="testimonial-slide ${idx === 0 ? 'active' : ''}">
-                            <div class="testimonial-card-inner">
-                                <div class="quote-symbol">“</div>
-                                <p class="testimonial-text">${t.text}</p>
-                                <div class="client-profile">
-                                    <img src="${t.image}" alt="${t.name} client portrait" class="client-img">
-                                    <div class="client-info">
-                                        <h4 class="client-name">${t.name}</h4>
-                                        <span class="client-role">${t.role}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `).join("");
-                }
-                if (indicatorsBox) {
-                    indicatorsBox.innerHTML = cms.testimonials.map((t, idx) => `
-                        <button class="indicator ${idx === 0 ? 'active' : ''}" data-slide="${idx}"></button>
-                    `).join("");
-                }
-            }
-        } catch (e) {
-            console.error("CMS Sync Error:", e);
-        }
-    };
-
-    // Run Initial Sync
-    syncCMSContent();
-
-    // Listen for storage changes from Admin tab
-    window.addEventListener("storage", syncCMSContent);
-
-    // ==========================================================================
     // 1. Sticky Header Shrink
     // ==========================================================================
     const mainHeader = document.getElementById('mainHeader');
@@ -698,6 +428,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const isMessageValid = validateField(messageInput);
 
             if (isNameValid && isEmailValid && isMessageValid) {
+                // Save inquiry to localStorage for Admin Portal
+                const subjectInput = document.getElementById('subject');
+                const serviceVal = (subjectInput && subjectInput.value.trim()) ? subjectInput.value.trim() : 'Turnkey Construction';
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) + 
+                                ', ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+                const newInquiry = {
+                    id: 'INQ-' + Math.floor(10000 + Math.random() * 90000),
+                    name: nameInput.value.trim(),
+                    phone: '',
+                    email: emailInput.value.trim(),
+                    service: serviceVal,
+                    message: messageInput.value.trim(),
+                    status: 'New',
+                    date: dateStr,
+                    notes: 'Submitted via website consultation form.'
+                };
+
+                try {
+                    const existing = JSON.parse(localStorage.getItem('dna_landmarkz_inquiries') || '[]');
+                    existing.unshift(newInquiry);
+                    localStorage.setItem('dna_landmarkz_inquiries', JSON.stringify(existing));
+                } catch(err) {
+                    console.error('Error saving inquiry to admin storage:', err);
+                }
+
                 // Form is valid: simulate loading state
                 btnSubmit.classList.add('loading');
                 btnSubmit.disabled = true;
@@ -727,4 +484,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Dynamic CMS Footer Hydration
+    (function hydrateIndexFooter() {
+        try {
+            const dataStr = localStorage.getItem('dnalandmarkz_cms_data');
+            if (!dataStr) return;
+            const cms = JSON.parse(dataStr);
+            if (cms && cms.footer) {
+                const devName = document.getElementById('footerDevName');
+                const devEmail = document.getElementById('footerDevEmail');
+                const devEmailLink = document.getElementById('footerDevEmailLink');
+                if (devName && cms.footer.devName) devName.innerText = cms.footer.devName;
+                if (devEmail && cms.footer.devEmail) devEmail.innerText = cms.footer.devEmail;
+                if (devEmailLink && cms.footer.devEmail) devEmailLink.href = 'mailto:' + cms.footer.devEmail;
+            }
+        } catch(e) {
+            console.error('Footer hydration error:', e);
+        }
+    })();
 });
