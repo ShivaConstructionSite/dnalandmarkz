@@ -485,8 +485,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Dynamic CMS Footer Hydration
-    (function hydrateIndexFooter() {
+    // Dynamic CMS Footer & Social Hydration
+    (function hydrateIndexFooterAndSocial() {
         try {
             const dataStr = localStorage.getItem('dnalandmarkz_cms_data');
             if (!dataStr) return;
@@ -499,8 +499,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (devEmail && cms.footer.devEmail) devEmail.innerText = cms.footer.devEmail;
                 if (devEmailLink && cms.footer.devEmail) devEmailLink.href = 'mailto:' + cms.footer.devEmail;
             }
+
+            if (cms && cms.social) {
+                const soc = cms.social;
+                if (soc.instagram) {
+                    document.querySelectorAll('.social-insta').forEach(el => el.href = soc.instagram);
+                }
+                if (soc.youtube) {
+                    document.querySelectorAll('.social-youtube').forEach(el => el.href = soc.youtube);
+                }
+                const waPhone = (soc.whatsapp || '919080206002').replace(/[^0-9]/g, '');
+                const waMsg = encodeURIComponent(soc.whatsappMsg || 'Hello DNA LANDMARKZ, I would like to inquire about your turnkey construction and interior services.');
+                const waUrl = `https://wa.me/${waPhone}?text=${waMsg}`;
+                document.querySelectorAll('.social-whatsapp, .whatsapp-float-btn').forEach(el => el.href = waUrl);
+            }
         } catch(e) {
-            console.error('Footer hydration error:', e);
+            console.error('Footer & social hydration error:', e);
         }
     })();
 });

@@ -71,6 +71,12 @@ const DEFAULT_CMS_DATA = {
         devEmail: "rajadrcs@gmail.com",
         endText: "- END -"
     },
+    social: {
+        instagram: "https://www.instagram.com/dnalandmarkz?srtk=bnd5N3U1ZWsyM25x",
+        whatsapp: "919080206002",
+        whatsappMsg: "Hello DNA LANDMARKZ, I would like to inquire about your turnkey construction and interior services.",
+        youtube: "https://youtube.com/@dnalandmarkz?si=1w28RmQ3Aq1PM5hL"
+    },
     privacyPolicy: {
         lastUpdated: "October 2026",
         contactEmail: "info@dnalandmarkz.com",
@@ -332,6 +338,17 @@ function loadDashboardFields() {
         document.getElementById("cfgContactDesc").value = cms.general.contactDesc || "";
     }
 
+    // 7b. Social Media Links
+    if (document.getElementById("cfgSocialInsta")) {
+        const soc = cms.social || DEFAULT_CMS_DATA.social;
+        document.getElementById("cfgSocialInsta").value = soc.instagram || "https://www.instagram.com/dnalandmarkz?srtk=bnd5N3U1ZWsyM25x";
+        document.getElementById("cfgSocialWhatsapp").value = soc.whatsapp || "919080206002";
+        if (document.getElementById("cfgSocialWhatsappMsg")) {
+            document.getElementById("cfgSocialWhatsappMsg").value = soc.whatsappMsg || "Hello DNA LANDMARKZ, I would like to inquire about your turnkey construction and interior services.";
+        }
+        document.getElementById("cfgSocialYoutube").value = soc.youtube || "https://youtube.com/@dnalandmarkz?si=1w28RmQ3Aq1PM5hL";
+    }
+
     // 8. Footer
     if (document.getElementById("cfgCopyright")) {
         document.getElementById("cfgCopyright").value = cms.footer.copyright || "© 2026 DNA LANDMARKZ. All rights reserved.";
@@ -556,6 +573,19 @@ function saveGeneralConfig() {
     cms.general.address = document.getElementById("cfgAddress").value.trim();
     cms.general.email = document.getElementById("cfgEmail").value.trim();
     cms.general.contactDesc = document.getElementById("cfgContactDesc").value.trim();
+
+    // Social Media Links
+    const soc = cms.social || {};
+    if (document.getElementById("cfgSocialInsta")) {
+        soc.instagram = document.getElementById("cfgSocialInsta").value.trim();
+        soc.whatsapp = document.getElementById("cfgSocialWhatsapp").value.trim();
+        if (document.getElementById("cfgSocialWhatsappMsg")) {
+            soc.whatsappMsg = document.getElementById("cfgSocialWhatsappMsg").value.trim();
+        }
+        soc.youtube = document.getElementById("cfgSocialYoutube").value.trim();
+        cms.social = soc;
+    }
+
     saveCMSData(cms);
     showSuccessAlert();
 }
